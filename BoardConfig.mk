@@ -58,6 +58,9 @@ BLUETOOTH_HCI_USE_MCT := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# malloc implementation
+MALLOC_IMPL := dlmalloc
+
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
 
