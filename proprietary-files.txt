@@ -274,5 +274,19 @@ etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
-# WLAN
+# Modules
 lib/modules/pronto/pronto_wlan.ko
+lib/modules/ansi_cprng.ko
+lib/modules/gpio_axis.ko
+lib/modules/gpio_event.ko
+lib/modules/gpio_input.ko
+lib/modules/gpio_matrix.ko
+lib/modules/gpio_output.ko
+lib/modules/mcDrvModule.ko
+lib/modules/mcKernelApi.ko
+lib/modules/msm-buspm-dev.ko
+lib/modules/oprofile.ko
+lib/modules/qcrypto.ko
+lib/modules/radio-iris-transport.ko
+lib/modules/spidev.ko
+lib/modules/ice40-hcd.ko
