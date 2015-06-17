@@ -101,17 +101,6 @@ etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 
-# Display
-lib/hw/copybit.msm8916.so
-lib/hw/gralloc.msm8916.so
-lib/hw/hwcomposer.msm8916.so
-lib/hw/memtrack.msm8916.so
-lib/liboverlay.so
-lib/libqdMetaData.so
-lib/libqservice.so
-lib/libqdutils.so
-lib/libtinyxml.so
-
 # DRM
 bin/qseecomd
 vendor/lib/libdrmdecrypt.so
