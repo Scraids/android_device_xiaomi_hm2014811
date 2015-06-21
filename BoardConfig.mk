@@ -13,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# inherit from the proprietary version
--include vendor/xiaomi/hm2014811/BoardConfigVendor.mk
-
 DEVICE_PATH := device/xiaomi/hm2014811
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -39,22 +36,22 @@ TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := ramoops_memreserve=2M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x0000010 --kernel_offset 0x00008000 --dt $(DEVICE_PATH)/dt.img
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_SOURCE := kernel/qcom/msm8916
 TARGET_KERNEL_CONFIG := msm8916_defconfig
-TARGET_PREBUILT_KERNEL := device/xiaomi/hm2014811/kernel
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
+
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 AUDIO_FEATURE_DISABLED_DS1_DOLBY_DDP := true
 BOARD_USES_ALSA_AUDIO := true
 TARGET_QCOM_AUDIO_VARIANT := caf
-
-# ANT+
-BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
@@ -63,6 +60,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
+TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Crypto
@@ -75,12 +73,11 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_NO_COMPAT_GRALLOC_PERFORM := true
 TARGET_QCOM_DISPLAY_VARIANT := caf-new
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
-TARGET_CONTINUOUS_SPLASH_ENABLED := true
-
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE := true
@@ -110,21 +107,17 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 5939100672 # 5939117056 - 16384
 
+# Power
+TARGET_POWERHAL_VARIANT := qcom
+
 # Qualcomm support
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 
-# Power
-TARGET_POWERHAL_VARIANT := qcom
-
 # Recovery
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_RECOVERY_SWIPE := true
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
@@ -137,13 +130,13 @@ BOARD_SEPOLICY_DIRS += \
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
 WLAN_MODULES:
 	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
 
 TARGET_KERNEL_MODULES += WLAN_MODULES
-
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -158,3 +151,6 @@ TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# inherit from the proprietary version
+-include vendor/xiaomi/hm2014811/BoardConfigVendor.mk
