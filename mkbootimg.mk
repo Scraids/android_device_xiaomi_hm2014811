@@ -1,10 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk.cpio
-$(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
-	zcat $< > $@
-
-DTBTOOL := $(LOCAL_PATH)/dtbToolCM
+DTBTOOL := $(LOCAL_PATH)/mkbootimg_dtb
 KERNEL := $(LOCAL_PATH)/kernel
 DTB := $(LOCAL_PATH)/dt.img
 
