@@ -129,20 +129,6 @@ COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
 BOARD_SEPOLICY_DIRS += \
 	device/xiaomi/hm2014811/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    file.te \
-    device.te \
-    app.te \
-    cne.te \
-    qmux.te \
-    mpdecision.te \
-    thermald.te \
-    ueventd.te \
-    vold.te \
-    file_contexts \
-    genfs_contexts \
-    te_macros
-
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
